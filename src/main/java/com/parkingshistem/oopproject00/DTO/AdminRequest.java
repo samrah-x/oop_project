@@ -1,4 +1,4 @@
-package com.parkingshistem.oopproject00.dto;
+package com.parkingshistem.oopproject00.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerRequest {
+public class AdminRequest {
     private String firstName;
     private String lastName;
     private String email;
-    private String carNumber;
-    private String carModel;
-    private String licensePlate;
+    private String role;
 
 }

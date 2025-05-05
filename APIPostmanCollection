@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "071f7d08-3c03-4fc3-be0e-57d6f9cfac74",
+		"name": "Parking System",
+		"description": "API collection for the Parking System application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42806078"
+	},
+	"item": [
+		{
+			"name": "Admin Parking Operations",
+			"item": [
+				{
+					"name": "Create Parking Area",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Main Parking\",\n    \"location\": \"Building A\",\n    \"totalSlots\": 50\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/parking/areas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"areas"
+							]
+						},
+						"description": "Create a new parking area with specified number of slots"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Parking Areas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/admin/parking/areas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"areas"
+							]
+						},
+						"description": "Retrieve all active parking areas"
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Parking Area",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/admin/parking/areas/{{areaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"areas",
+								"{{areaId}}"
+							]
+						},
+						"description": "Deactivate a specific parking area"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Slot Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isAvailable\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/parking/slots/{{slotId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"slots",
+								"{{slotId}}"
+							]
+						},
+						"description": "Update availability status of a parking slot"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing parking areas and slots (admin only)"
+		},
+		{
+			"name": "User Operations",
+			"item": [
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						},
+						"description": "Get current authenticated user's information"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wallet Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/wallet",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"wallet"
+							]
+						},
+						"description": "Get user's wallet balance and transaction history"
+					},
+					"response": []
+				},
+				{
+					"name": "Top Up Wallet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100.00,\n    \"paymentMethod\": \"CREDIT_CARD\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/wallet/topup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"wallet",
+								"topup"
+							]
+						},
+						"description": "Add funds to user's wallet"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/transactions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"transactions"
+							]
+						},
+						"description": "Get all wallet transactions for the user"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for user management and wallet operations"
+		},
+		{
+			"name": "Booking Operations",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parkingSlotId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						},
+						"description": "Create a new booking for a parking slot"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User's Bookings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"user"
+							]
+						},
+						"description": "Get all bookings for the current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Booking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/active",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"active"
+							]
+						},
+						"description": "Get user's currently active booking"
+					},
+					"response": []
+				},
+				{
+					"name": "Complete Booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/{{bookingId}}/complete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{bookingId}}",
+								"complete"
+							]
+						},
+						"description": "Mark a booking as completed"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing parking slot bookings"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "your-oauth2-token",
+			"type": "string"
+		}
+	]
+}

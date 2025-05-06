@@ -1,10 +1,19 @@
 # Parking Management System
 
 i have lost my sanity. please don't send help
+As of right now, these are not the final endpoints I'll add more when I can :)
 
+### Some tiny things to note:  
+- OAuth2 for authentication
+- JWT for session authentication
+- HTTPS for all communications (in production)
+  
 ## Configuration
 
 ### Database Setup
+
+The database is user dependent since it's all local. Please follow these steps below and replace the credentials specific to my machine with yours :)  
+You have to download PostgreSQL and open pgadmin for your server. Set up the server, then **create a database "parking_system" on the port 5432.** It's important you do this or else errors will occur
 
 1. Create a PostgreSQL database:
 ```sql
@@ -19,6 +28,7 @@ spring.datasource.password=your_password
 ```
 
 ### Google OAuth2 Setup
+I'M NOT SURE IF THIS CAN WORK BUT TRY IGNORING THIS SETUP; MY OAUTH2 CLOUD CREDENTIALS ARE SET IN SO IT SHOULDN'T REALLY CAUSE ANY ISSUE
 
 1. Create a project in Google Cloud Console
 2. Enable OAuth2 APIs
@@ -30,6 +40,7 @@ spring.security.oauth2.client.registration.google.client-secret=your_client_secr
 ```
 
 ## Building and Running
+You may skip this if you have an IDE. Yes, just run the main function when you open it from there. Please make sure to install all dependencies via extensions or else it may cause issues.
 
 1. Clone the repository:
 ```bash
@@ -248,36 +259,13 @@ Once the application is running, you can access the Swagger UI at:
     }
     ```
 
-## Security
-
-The application uses:
-- OAuth2 for authentication
-- JWT for session management
-- Role-based access control
-- HTTPS for all communications (in production)
-
-## Business Rules
-
-- Bookings are same-day only
-- Fixed 12-hour slot duration
-- Fixed rate of Rs.50 per slot
-- One active booking per user
-- Wallet top-up through EasyPaisa or JazzCash only
-
-## Error Handling
-
-The application provides detailed error responses:
-- Validation errors with field-level details
-- Business rule violations
-- Authentication/Authorization errors
-- System errors
-
-## Testing
-
+## Testing  
+**These tests were written by AI. I have no clue if they'll work and if they even function properly. Please don't touch this. Please.**
 Run the tests using:
 ```bash
 mvn test
 ```
+<<<<<<< HEAD
 
 ## Contributing
 
@@ -308,3 +296,5 @@ This project is licensed under the Apache License 2.0 - see the LICENSE file for
 
 5. **Security**:
    - OAuth2 and JWT ensure secure authentication and session management.
+=======
+>>>>>>> d8ef2a6519cff7dd73f14bf3964a0de11ed071ec

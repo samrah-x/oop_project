@@ -1,17 +1,17 @@
 {
 	"info": {
-		"_postman_id": "071f7d08-3c03-4fc3-be0e-57d6f9cfac74",
-		"name": "Parking System",
-		"description": "API collection for the Parking System application",
+		"_postman_id": "b0cc461c-198e-4bb6-87a1-d1816f23e849",
+		"name": "Parking Management System API",
+		"description": "Postman collection for all endpoints in the Parking Management System.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "42806078"
 	},
 	"item": [
 		{
-			"name": "Admin Parking Operations",
+			"name": "Authentication",
 			"item": [
 				{
-					"name": "Create Parking Area",
+					"name": "Register",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -22,71 +22,25 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Main Parking\",\n    \"location\": \"Building A\",\n    \"totalSlots\": 50\n}"
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\",\n  \"isAdmin\": true\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/admin/parking/areas",
+							"raw": "{{baseUrl}}/auth/register",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"admin",
-								"parking",
-								"areas"
+								"auth",
+								"register"
 							]
-						},
-						"description": "Create a new parking area with specified number of slots"
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get All Parking Areas",
+					"name": "Login",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/admin/parking/areas",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"admin",
-								"parking",
-								"areas"
-							]
-						},
-						"description": "Retrieve all active parking areas"
-					},
-					"response": []
-				},
-				{
-					"name": "Deactivate Parking Area",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/admin/parking/areas/{{areaId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"admin",
-								"parking",
-								"areas",
-								"{{areaId}}"
-							]
-						},
-						"description": "Deactivate a specific parking area"
-					},
-					"response": []
-				},
-				{
-					"name": "Update Slot Status",
-					"request": {
-						"method": "PATCH",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -95,27 +49,22 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"isAvailable\": true\n}"
+							"raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/admin/parking/slots/{{slotId}}",
+							"raw": "{{baseUrl}}/auth/login",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"admin",
-								"parking",
-								"slots",
-								"{{slotId}}"
+								"auth",
+								"login"
 							]
-						},
-						"description": "Update availability status of a parking slot"
+						}
 					},
 					"response": []
 				}
-			],
-			"description": "Endpoints for managing parking areas and slots (admin only)"
+			]
 		},
 		{
 			"name": "User Operations",
@@ -123,20 +72,19 @@
 				{
 					"name": "Get Current User",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/users/me",
+							"raw": "{{baseUrl}}/api/users/me",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"users",
 								"me"
 							]
-						},
-						"description": "Get current authenticated user's information"
+						}
 					},
 					"response": []
 				},
@@ -146,17 +94,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/users/wallet",
+							"raw": "{{baseUrl}}/api/users/wallet",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"users",
 								"wallet"
 							]
-						},
-						"description": "Get user's wallet balance and transaction history"
+						}
 					},
 					"response": []
 				},
@@ -172,12 +119,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"amount\": 100.00,\n    \"paymentMethod\": \"CREDIT_CARD\"\n}"
+							"raw": "{\n  \"amount\": 1000\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/users/wallet/topup",
+							"raw": "{{baseUrl}}/api/users/wallet/topup",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
@@ -185,8 +132,7 @@
 								"wallet",
 								"topup"
 							]
-						},
-						"description": "Add funds to user's wallet"
+						}
 					},
 					"response": []
 				},
@@ -196,22 +142,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/users/transactions",
+							"raw": "{{baseUrl}}/api/users/transactions",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"users",
 								"transactions"
 							]
-						},
-						"description": "Get all wallet transactions for the user"
+						}
 					},
 					"response": []
 				}
-			],
-			"description": "Endpoints for user management and wallet operations"
+			]
 		},
 		{
 			"name": "Booking Operations",
@@ -228,19 +172,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"parkingSlotId\": 1\n}"
+							"raw": "{\n  \"slotId\": 1,\n  \"startTime\": \"2025-05-06T10:00:00Z\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/bookings",
+							"raw": "{{baseUrl}}/api/bookings",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"bookings"
 							]
-						},
-						"description": "Create a new booking for a parking slot"
+						}
 					},
 					"response": []
 				},
@@ -250,17 +193,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/bookings/user",
+							"raw": "{{baseUrl}}/api/bookings/user",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"bookings",
 								"user"
 							]
-						},
-						"description": "Get all bookings for the current user"
+						}
 					},
 					"response": []
 				},
@@ -270,17 +212,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/bookings/active",
+							"raw": "{{baseUrl}}/api/bookings/active",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"bookings",
 								"active"
 							]
-						},
-						"description": "Get user's currently active booking"
+						}
 					},
 					"response": []
 				},
@@ -290,9 +231,9 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/bookings/{{bookingId}}/complete",
+							"raw": "{{baseUrl}}/api/bookings/{{bookingId}}/complete",
 							"host": [
-								"{{base_url}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
@@ -300,35 +241,116 @@
 								"{{bookingId}}",
 								"complete"
 							]
-						},
-						"description": "Mark a booking as completed"
+						}
 					},
 					"response": []
 				}
-			],
-			"description": "Endpoints for managing parking slot bookings"
-		}
-	],
-	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "{{access_token}}",
-				"type": "string"
-			}
-		]
-	},
-	"variable": [
-		{
-			"key": "base_url",
-			"value": "http://localhost:8080",
-			"type": "string"
+			]
 		},
 		{
-			"key": "access_token",
-			"value": "your-oauth2-token",
-			"type": "string"
+			"name": "Admin Operations",
+			"item": [
+				{
+					"name": "Create Parking Area",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Main Parking Area\",\n  \"location\": \"Downtown\",\n  \"totalSlots\": 50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/parking/areas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"areas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Parking Areas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/parking/areas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"areas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Parking Area",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/parking/areas/{{areaId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"areas",
+								"{{areaId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Slot Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"OCCUPIED\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/parking/slots/{{slotId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"parking",
+								"slots",
+								"{{slotId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -21,7 +21,9 @@ public class SecurityConfig {
                     "/api-docs/**",
                     "/api-docs.yaml",
                     "/swagger-ui.html",
-                    "/swagger-ui/**").permitAll()
+                    "/swagger-ui/**",
+                    "/auth/register",
+                    "/auth/login").permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2

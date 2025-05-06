@@ -14,10 +14,22 @@ public class User {
     private Long id;
     
     private String googleId;
-    private String email;
-    private String name;
-    private String role;
     
+    @Column(unique = true)
+    private String email;
+    
+    private String name;
+    private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    private List<ParkingArea> managedParkingAreas;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Booking> userBookings;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Wallet wallet;
     

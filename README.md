@@ -1,7 +1,7 @@
 # Parking Management System
 
-i have lost my sanity. please don't send help
-As of right now, these are not the final endpoints I'll add more when I can :)
+i have lost my sanity. please don't send help  
+As of right now, these are not the final endpoints I'll add more when I can :)  
 
 ### Some tiny things to note:  
 - OAuth2 for authentication
@@ -265,20 +265,6 @@ Run the tests using:
 ```bash
 mvn test
 ```
-<<<<<<< HEAD
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
-
 ## Application Flow
 
 1. **Registration**:
@@ -296,5 +282,4 @@ This project is licensed under the Apache License 2.0 - see the LICENSE file for
 
 5. **Security**:
    - OAuth2 and JWT ensure secure authentication and session management.
-=======
->>>>>>> d8ef2a6519cff7dd73f14bf3964a0de11ed071ec
+

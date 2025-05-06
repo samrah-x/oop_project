@@ -15,6 +15,9 @@ public class ParkingArea {
     private String name;
     private String location;
     private Integer totalSlots;
+@ManyToOne
+    @JoinColumn(name = "admin_id")
+    private User admin;
     private Boolean isActive;
     
     @OneToMany(mappedBy = "parkingArea", cascade = CascadeType.ALL)

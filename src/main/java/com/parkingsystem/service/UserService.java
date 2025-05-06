@@ -2,6 +2,7 @@ package com.parkingsystem.service;
 
 import com.parkingsystem.entity.User;
 import com.parkingsystem.entity.Wallet;
+import com.parkingsystem.entity.Role;
 import com.parkingsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class UserService {
         newUser.setGoogleId(googleId);
         newUser.setEmail(email);
         newUser.setName(name);
-        newUser.setRole("USER");
+        newUser.setRole(Role.USER);
 
         // Create wallet for new user
         Wallet wallet = new Wallet();

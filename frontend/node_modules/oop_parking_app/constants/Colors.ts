@@ -1,0 +1,41 @@
+const tintColorLight = "#0047AB" // Dark Blue
+const tintColorDark = "#4B9CD3" // Lighter Blue for dark mode
+
+export default {
+  light: {
+    text: "#000000",
+    textDim: "#666666",
+    background: "#FFFFFF",
+    card: "#F5F5F5",
+    cardDarker: "#E0E0E0",
+    tint: tintColorLight,
+    tabIconDefault: "#CCCCCC",
+    tabIconSelected: tintColorLight,
+    primary: tintColorLight,
+    primaryLight: "#E6F0FF",
+    secondary: "#E8E8E8",
+    border: "#DDDDDD",
+    link: "#0066CC",
+    error: "#FF3B30",
+    success: "#34C759",
+    warning: "#FF9500",
+  },
+  dark: {
+    text: "#FFFFFF",
+    textDim: "#A0A0A0",
+    background: "#121212",
+    card: "#1E1E1E",
+    cardDarker: "#2C2C2C",
+    tint: tintColorDark,
+    tabIconDefault: "#777777",
+    tabIconSelected: tintColorDark,
+    primary: tintColorDark,
+    primaryLight: "#1A3A5A",
+    secondary: "#333333",
+    border: "#444444",
+    link: "#5B9BD5",
+    error: "#FF453A",
+    success: "#30D158",
+    warning: "#FFD60A",
+  },
+}

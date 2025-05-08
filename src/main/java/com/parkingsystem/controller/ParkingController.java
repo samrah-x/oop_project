@@ -1,6 +1,7 @@
 package com.parkingsystem.controller;
 
 import com.parkingsystem.entity.ParkingArea;
+import com.parkingsystem.entity.ParkingSlot;
 import com.parkingsystem.entity.User;
 import com.parkingsystem.service.ParkingService;
 import com.parkingsystem.service.UserService;
@@ -10,10 +11,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/admin/parking")
+@RequestMapping("/api/admin/parkingAreas")
 @RequiredArgsConstructor
 public class ParkingController {
     private final ParkingService parkingService;
@@ -87,5 +89,44 @@ public class ParkingController {
 
         parkingService.updateSlotStatus(slotId, isAvailable);
         return ResponseEntity.ok(Map.of("message", "Slot status updated successfully"));
+    }
+    @GetMapping("/{areaId}")
+    public ResponseEntity<?> getParkingSlotsByAreaId(
+            @PathVariable Long areaId,
+            @AuthenticationPrincipal OAuth2User principal) {
+        
+        String googleId = principal.getAttribute("sub");
+        User user = userService.findByGoogleId(googleId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        
+        if (!userService.isAdmin(user)) {
+            return ResponseEntity.status(403).body(Map.of("error", "Admin access required"));
+        }
+
+        List<ParkingSlot> slots = parkingService.getParkingSlotsByAreaId(areaId);
+        return ResponseEntity.ok(slots);
+    }
+
+    @PostMapping("/{areaId}")
+    public ResponseEntity<?> addParkingSlotsToArea(
+            @PathVariable Long areaId,
+            @RequestBody Map<String, Integer> request,
+            @AuthenticationPrincipal OAuth2User principal) {
+        
+        String googleId = principal.getAttribute("sub");
+        User user = userService.findByGoogleId(googleId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        
+        if (!userService.isAdmin(user)) {
+            return ResponseEntity.status(403).body(Map.of("error", "Admin access required"));
+        }
+
+        Integer additionalSlots = request.get("additionalSlots");
+        if (additionalSlots == null || additionalSlots <= 0) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Invalid number of additional slots"));
+        }
+
+        parkingService.addParkingSlotsToArea(areaId, additionalSlots);
+        return ResponseEntity.ok(Map.of("message", "Parking slots added successfully"));
     }
 }

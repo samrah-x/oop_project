@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface ParkingSlotRepository extends JpaRepository<ParkingSlot, Long> {
+    List<ParkingSlot> findByParkingArea(ParkingArea parkingArea);
+    
     List<ParkingSlot> findByParkingAreaAndIsAvailableTrue(ParkingArea parkingArea);
     
     @Query("SELECT ps FROM ParkingSlot ps WHERE ps.parkingArea = :parkingArea " +

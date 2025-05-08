@@ -112,4 +112,15 @@ public class BookingService {
         
         bookingRepository.save(booking);
     }
+    public List<Booking> getAllActiveBookings() {
+        return bookingRepository.findByIsActiveTrue();
+    }
+
+    public List<Booking> getAllPastBookings() {
+        return bookingRepository.findByIsActiveFalse();
+    }
+
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
+    }
 }

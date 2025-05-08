@@ -51,6 +51,6 @@ public class UserService {
     }
 
     public boolean isAdmin(User user) {
-        return "ADMIN".equals(user.getRole());
+        return Role.ADMIN.equals(user.getRole());
     }
 }

@@ -21,4 +21,8 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("SELECT COUNT(b) FROM Booking b WHERE b.user = :user " +
            "AND b.startTime >= :startDate AND b.isActive = true")
     long countActiveSameDayBookings(User user, LocalDateTime startDate);
+    
+    List<Booking> findByIsActiveTrue();
+    
+    List<Booking> findByIsActiveFalse();
 }

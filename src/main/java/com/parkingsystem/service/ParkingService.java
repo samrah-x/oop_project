@@ -86,4 +86,30 @@ public class ParkingService {
     public long getTotalSlotsCount(ParkingArea parkingArea) {
         return parkingSlotRepository.getTotalSlotCount(parkingArea);
     }
+    public List<ParkingSlot> getParkingSlotsByAreaId(Long areaId) {
+        ParkingArea parkingArea = parkingAreaRepository.findById(areaId)
+                .orElseThrow(() -> new IllegalArgumentException("Parking area not found"));
+        return parkingSlotRepository.findByParkingArea(parkingArea);
+    }
+
+    @Transactional
+    public void addParkingSlotsToArea(Long areaId, Integer additionalSlots) {
+        ParkingArea parkingArea = parkingAreaRepository.findById(areaId)
+                .orElseThrow(() -> new IllegalArgumentException("Parking area not found"));
+        
+        int currentTotalSlots = parkingArea.getTotalSlots();
+        int startNumber = currentTotalSlots + 1;
+
+        for (int i = startNumber; i < startNumber + additionalSlots; i++) {
+            ParkingSlot slot = new ParkingSlot();
+            slot.setParkingArea(parkingArea);
+            slot.setSlotNumber(String.format("%03d", i));
+            slot.setIsAvailable(true);
+            slot.setVehicleType("CARS_ONLY");
+            parkingSlotRepository.save(slot);
+        }
+
+        parkingArea.setTotalSlots(currentTotalSlots + additionalSlots);
+        parkingAreaRepository.save(parkingArea);
+    }
 }

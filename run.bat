@@ -1,9 +1,0 @@
-@echo off
-echo Cleaning previous build...
-call mvn clean
-
-echo Building project...
-call mvn install -DskipTests
-
-echo Running application with debug logging...
-call mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dlogging.level.org.springframework=DEBUG"

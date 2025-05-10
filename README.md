@@ -1,6 +1,7 @@
 # Parking Control System
 
-A Spring Boot REST API for managing car parks, users, owners, layouts, and rentals.
+A Spring Boot REST API for managing car parks, users, owners, layouts, and rentals.  
+Please change the postgres SQL server settings in application.properites. Also, the endpoints are available at localhost:8081
 
 ---
 
